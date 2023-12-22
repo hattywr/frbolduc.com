@@ -1,0 +1,4 @@
+# .gitignore
+Properties/serviceDependencies.json
+
+/Properties/
