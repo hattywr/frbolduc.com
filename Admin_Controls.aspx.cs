@@ -1,10 +1,7 @@
-﻿using Azure.Storage.Blobs;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.IO;
 
 namespace Buldoc_Reader_Take_4
 {
@@ -47,7 +44,7 @@ namespace Buldoc_Reader_Take_4
 
                 cell1.Text = record.recordName;
 
-                if(record.recordURL.ToLower().Contains("mp3"))
+                if(record.recordURL.ToLower().Contains("mp3") || record.recordURL.ToLower().Contains("aac"))
                 {
                     HtmlAudio audio = new HtmlAudio();
                     audio.Attributes.Add("type", "audio/mp3");
@@ -61,7 +58,38 @@ namespace Buldoc_Reader_Take_4
                     row.Cells.Add(cell1);
                     row.Cells.Add(cell2);
                     Audio_Content.Controls.Add(row);
+
                 }
+                else if(record.recordURL.ToLower().Contains("xlsx"))
+                {
+                    HyperLink link = new HyperLink();
+                    link.Text = "Source Download";
+                    link.NavigateUrl = record.recordURL;
+                    link.Attributes["download"] = record.recordURL;
+                    link.Attributes["target"] = "_blank";
+
+                    cell2.Controls.Add(link);
+
+                    row.Cells.Add(cell1);
+                    row.Cells.Add(cell2);
+                    Audio_Content.Controls.Add(row);
+                }
+                else if(record.recordURL.ToLower().Contains("pdf") || record.recordURL.ToLower().Contains("docx") || record.recordURL.ToLower().Contains("doc"))
+                {
+                    HyperLink link = new HyperLink();
+                    link.Text = "Source Download";
+                    link.NavigateUrl = record.recordURL;
+                    link.Attributes["download"] = record.recordURL;
+                    link.Attributes["target"] = "_blank";
+
+                    cell2.Controls.Add(link);
+
+                    row.Cells.Add(cell1);
+                    row.Cells.Add(cell2);
+                    Audio_Content.Controls.Add(row);
+                }
+
+                
             }
         }    
     }

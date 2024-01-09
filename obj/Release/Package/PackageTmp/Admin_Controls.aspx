@@ -7,7 +7,7 @@
     <asp:Table ID="Audio_Content" runat="server" CssClass="contents_table">
 
        <asp:TableRow runat="server" CssClass="table_title">
-           <asp:TableCell runat="server" Text="Restricted Audio Recordings" ColumnSpan="2" CssClass="title_cell">
+           <asp:TableCell runat="server" Text="Restricted Content" ColumnSpan="2" CssClass="title_cell">
         </asp:TableCell>
 
        </asp:TableRow>

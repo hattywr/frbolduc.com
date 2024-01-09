@@ -1,12 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
 using MySql.Data.MySqlClient;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json; // Add this line
 using Newtonsoft.Json.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Collections.Generic;
 
 
 
@@ -257,7 +253,7 @@ namespace Buldoc_Reader_Take_4
             }
             catch (Exception ex)
             {
-
+                
             }
             finally
             {

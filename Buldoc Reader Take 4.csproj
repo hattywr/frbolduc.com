@@ -499,7 +499,6 @@
     <Compile Include="Audio_Table_Of_Contents.aspx.designer.cs">
       <DependentUpon>Audio_Table_Of_Contents.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Buldoc_Storage_Connections.cs" />
     <Compile Include="ImageRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestrictedRecord.cs" />
