@@ -10,11 +10,17 @@ namespace Buldoc_Reader_Take_4
 		public int ID;
 		public string recordingName;
 		public string recordingURL;
-		public AudioRecord(int recordID, string recordName, string recordURL) 
+		public string recordingDate;
+		public string recordingLength;
+		public string recordingDescription;
+		public AudioRecord(int recordID, string recordName, string recordURL, string recordDate, string recordLength, string recordDescription) 
 		{ 
 			ID = recordID;
 			recordingName = recordName;
 			recordingURL = recordURL;
+			recordingDate = recordDate;
+			recordingLength = recordLength;	
+			recordingDescription = recordDescription;
 		
 		}
 	}

@@ -49,8 +49,11 @@ namespace Buldoc_Reader_Take_4
                             int ID = reader.GetInt32("ID");
                             string name = reader.GetString("recordingName");
                             string url = reader.GetString("recordingURL");
+                            string date = reader.GetString("recordingDate");
+                            string length = reader.GetString("recordingLength");
+                            string description = reader.GetString("recordingDescription");
 
-                            AudioRecord audioRecord = new AudioRecord(ID, name, url);
+                            AudioRecord audioRecord = new AudioRecord(ID, name, url, date, length, description);
                             records.Add(audioRecord);
 
                         }
@@ -87,8 +90,12 @@ namespace Buldoc_Reader_Take_4
                             int ID = reader.GetInt32("ID");
                             string name = reader.GetString("videoName");
                             string url = reader.GetString("videoURL");
+                            string description = reader.GetString("videoDescription");
+                            string length = reader.GetString("videoLength");
+                            string date = reader.GetString("videoDate");
+                            string location = reader.GetString("videoLocation");
 
-                            VideoRecord videoRecord = new VideoRecord(ID, name, url);
+                            VideoRecord videoRecord = new VideoRecord(ID, name, url, description, length, date, location);
                             records.Add(videoRecord);
 
                         }

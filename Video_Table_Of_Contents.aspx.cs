@@ -24,17 +24,11 @@ namespace Buldoc_Reader_Take_4
 
         private void create_table() 
         {
-            TableRow row3 = new TableRow();
             TableRow row4 = new TableRow();
-            row3.CssClass = "content_row";
-            TableCell cell3 = new TableCell();
             TableCell cell4 = new TableCell();
-            cell3.CssClass = "title_cell";
-            cell3.ColumnSpan = 2;
             cell4.CssClass = "content_cell";
             cell4.ColumnSpan = 2;
             cell4.HorizontalAlign = HorizontalAlign.Center;
-            cell3.Text = "Link to External Bolduc PBS Special";
 
 
             Button bolduc_button = new Button();
@@ -44,56 +38,84 @@ namespace Buldoc_Reader_Take_4
             bolduc_button.OnClientClick = "target = '_blank';";
             cell4.Controls.Add(bolduc_button);
 
-            row3.Cells.Add(cell3);
             row4.Cells.Add(cell4);
-            Video_Table_of_Contents.Controls.Add(row3);
             Video_Table_of_Contents.Controls.Add(row4);
 
             foreach(VideoRecord record in records)
             {
                 if(record.videoURL.ToLower().Contains("mp4"))
                 {
-                    TableRow row1 = new TableRow();
-                    TableRow row2 = new TableRow();
-                    row1.CssClass = "content_row";
+                    TableRow title = new TableRow();
+                    title.CssClass = "table_title";
+                    TableCell cell = new TableCell();
+                    cell.CssClass = "title_cell";
+                    cell.ColumnSpan = 2;
+                    cell.Text = record.videoDescription;
+                    title.Cells.Add(cell);
+
+                    TableRow row = new TableRow();
+                    row.CssClass = "content_row";
                     TableCell cell1 = new TableCell();
                     TableCell cell2 = new TableCell();
-                    cell1.CssClass = "title_cell";
-                    cell1.ColumnSpan = 2;
+                    cell1.CssClass = "content_cell";
                     cell2.CssClass = "content_cell";
-                    cell2.ColumnSpan = 2;
-                    cell2.HorizontalAlign = HorizontalAlign.Center;
+                    row.Cells.Add(cell1);
+                    row.Cells.Add(cell2);
 
-                    cell1.Text = record.videoName;
+                    cell1.Text = $"Date: {record.videoDate}";
+                    cell2.Text = $"Length: {record.videoLength}";
+
+
+                    TableRow row1 = new TableRow();
+                    row1.CssClass = "content_row";
+                    TableCell cell3 = new TableCell();
+                    cell3.CssClass = "content_cell";
+                    cell3.ColumnSpan = 2;
+
 
                     HtmlVideo video = new HtmlVideo();
-
                     video.Attributes.Add("type", "video/mp4");
                     video.Attributes.Add("controls", "controls");
                     video.Src = record.videoURL;
                     video.Attributes.Add("preload", "preload");
 
-                    cell2.Controls.Add(video);
+                    cell3.Controls.Add(video);
 
-                    row1.Cells.Add(cell1);
-                    row2.Cells.Add(cell2);
+                    row1.Cells.Add(cell3);
+
+                    Video_Table_of_Contents.Controls.Add(title);
+                    Video_Table_of_Contents.Controls.Add(row);
                     Video_Table_of_Contents.Controls.Add(row1);
-                    Video_Table_of_Contents.Controls.Add(row2);
                 }
                 else if (record.videoURL.ToLower().Contains("youtu"))
                 {
-                    TableRow row1 = new TableRow();
-                    TableRow row2 = new TableRow();
-                    row1.CssClass = "content_row";
+                    TableRow title = new TableRow();
+                    title.CssClass = "table_title";
+                    TableCell cell = new TableCell();
+                    cell.CssClass = "title_cell";
+                    cell.ColumnSpan = 2;
+                    cell.Text = record.videoDescription;
+                    title.Cells.Add(cell);
+
+                    TableRow row = new TableRow();
+                    row.CssClass = "content_row";
                     TableCell cell1 = new TableCell();
                     TableCell cell2 = new TableCell();
-                    cell1.CssClass = "title_cell";
-                    cell1.ColumnSpan = 2;
+                    cell1.CssClass = "content_cell";
                     cell2.CssClass = "content_cell";
-                    cell2.ColumnSpan = 2;
-                    cell2.HorizontalAlign = HorizontalAlign.Center;
+                    row.Cells.Add(cell1);
+                    row.Cells.Add(cell2);
 
-                    cell1.Text = record.videoName;
+                    cell1.Text = $"Date: {record.videoDate}";
+                    cell2.Text = $"Length: {record.videoLength}";
+
+
+                    TableRow row1 = new TableRow();
+                    row1.CssClass = "content_row";
+                    TableCell cell3 = new TableCell();
+                    cell3.CssClass = "content_cell";
+                    cell3.ColumnSpan = 2;
+
 
                     var iframe = new HtmlGenericControl("iframe");
 
@@ -104,14 +126,15 @@ namespace Buldoc_Reader_Take_4
                     iframe.Attributes["frameborder"] = "0";
                     iframe.Attributes["allowfullscreen"] = "true";
 
-                    
 
-                    cell2.Controls.Add(iframe);
 
-                    row1.Cells.Add(cell1);
-                    row2.Cells.Add(cell2);
+                    cell3.Controls.Add(iframe);
+
+                    row1.Cells.Add(cell3);
+
+                    Video_Table_of_Contents.Controls.Add(title);
+                    Video_Table_of_Contents.Controls.Add(row);
                     Video_Table_of_Contents.Controls.Add(row1);
-                    Video_Table_of_Contents.Controls.Add(row2);
                 }
                 
             }

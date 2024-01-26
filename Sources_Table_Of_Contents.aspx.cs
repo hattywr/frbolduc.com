@@ -29,7 +29,7 @@ namespace Buldoc_Reader_Take_4
 
                 if(record.sourceNumber == 0)
                 {
-                    cell1.Text = "PADRE PIO REPORT";
+                    cell1.Text = "PADRE PIO WRITEUP";
                 }
                 else
                 {

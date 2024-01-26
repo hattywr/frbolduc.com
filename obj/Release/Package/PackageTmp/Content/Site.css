@@ -168,8 +168,8 @@
 }
 
 .sermon_audio_player {
-    height: 2em;
-    width: 35em
+    height: 4em;
+    width: 100%
 }
 
 .image_viewer {
