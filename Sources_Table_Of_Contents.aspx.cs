@@ -20,23 +20,40 @@ namespace Buldoc_Reader_Take_4
         {
             foreach(SourceRecord record in records)
             {
+                TableRow title = new TableRow();
+                title.CssClass = "table_title";
+                TableCell cell = new TableCell();
+                cell.CssClass = "title_cell";
+                cell.ColumnSpan = 2;
+                cell.Text = record.sourceDescription;
+                title.Cells.Add(cell);
+
                 TableRow row = new TableRow();
                 row.CssClass = "content_row";
                 TableCell cell1 = new TableCell();
                 TableCell cell2 = new TableCell();
                 cell1.CssClass = "content_cell";
                 cell2.CssClass = "content_cell";
+                row.Cells.Add(cell1);
+                row.Cells.Add(cell2);
+                cell1.Text = $"Date: {record.sourceDate}";
+                cell2.Text = $"Type: {record.sourceType}";
+
+                TableRow sourceRow = new TableRow();
+                sourceRow.CssClass = "content_row";
+                TableCell cell4 = new TableCell();
+                TableCell cell5 = new TableCell();
+                cell4.CssClass = "content_cell";
+                cell5.CssClass = "content_cell";
 
                 if(record.sourceNumber == 0)
                 {
-                    cell1.Text = "PADRE PIO WRITEUP";
+                    cell4.Text = $"Padre Pio Writeup";
                 }
                 else
                 {
-                    cell1.Text = "Source " + record.sourceNumber.ToString();
+                    cell4.Text = $"Source {record.sourceNumber}";
                 }
-
-                
 
                 HyperLink link = new HyperLink();
                 link.Text = "Source Download";
@@ -44,11 +61,13 @@ namespace Buldoc_Reader_Take_4
                 link.Attributes["download"] = record.sourceURL;
                 link.Attributes["target"] = "_blank";
 
-                cell2.Controls.Add(link);
+                cell5.Controls.Add(link);
+                sourceRow.Controls.Add(cell4);
+                sourceRow.Controls.Add(cell5);
 
-                row.Cells.Add(cell1);
-                row.Cells.Add(cell2);
+                Sources_Table_of_Contents.Controls.Add(title);
                 Sources_Table_of_Contents.Controls.Add(row);
+                Sources_Table_of_Contents.Controls.Add(sourceRow);
             }
         }
     }

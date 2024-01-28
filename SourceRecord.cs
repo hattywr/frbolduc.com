@@ -11,12 +11,18 @@ namespace Buldoc_Reader_Take_4
         public string fileExtension;
         public int sourceNumber;
         public string sourceURL;
-        public SourceRecord(int recordID, string recordExtension, int recordNumber, string recordURL) 
+        public string sourceDescription;
+        public string sourceDate;
+        public string sourceType;
+        public SourceRecord(int recordID, string recordExtension, int recordNumber, string recordURL, string recordDescription, string recordDate, string recordType) 
         {
             ID = recordID;
             fileExtension = recordExtension;
             sourceNumber = recordNumber;
-            sourceURL = recordURL;            
+            sourceURL = recordURL;        
+            sourceDescription = recordDescription;
+            sourceDate = recordDate;
+            sourceType = recordType;
         }
 
     }

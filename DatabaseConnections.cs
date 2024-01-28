@@ -174,8 +174,11 @@ namespace Buldoc_Reader_Take_4
                             string extension = reader.GetString("fileExtension");
                             int sourceNumber = reader.GetInt32("sourceNumber");
                             string url = reader.GetString("sourceURL");
+                            string description = reader.GetString("sourceDescription");
+                            string date = reader.GetString("sourceDate");
+                            string type = reader.GetString("sourceType");
 
-                            SourceRecord source = new SourceRecord(ID, extension, sourceNumber, url);
+                            SourceRecord source = new SourceRecord(ID, extension, sourceNumber, url, description, date, type);
                             records.Add(source);
 
                         }
