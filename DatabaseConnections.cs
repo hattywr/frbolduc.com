@@ -133,8 +133,10 @@ namespace Buldoc_Reader_Take_4
                             string name = reader.GetString("pictureName");
                             int pictureNumber = reader.GetInt32("pictureNumber");
                             string url = reader.GetString("pictureURL");
+                            string date = reader.GetString("pictureDate");
+                            string description = reader.GetString("pictureDescription");
 
-                            ImageRecord imageRecord = new ImageRecord(ID, name, pictureNumber, url);
+                            ImageRecord imageRecord = new ImageRecord(ID, name, pictureNumber, url, date, description);
                             records.Add(imageRecord);
 
                         }

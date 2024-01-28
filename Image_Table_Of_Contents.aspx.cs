@@ -23,28 +23,47 @@ namespace Buldoc_Reader_Take_4
 
             foreach(ImageRecord record in records)
             {
+
+                TableRow title = new TableRow();
+                title.CssClass = "table_title";
+                TableCell cell = new TableCell();
+                cell.CssClass = "title_cell";
+                cell.ColumnSpan = 2;
+                cell.Text = record.pictureDescription;
+                title.Cells.Add(cell);
+
+
+
                 TableRow row = new TableRow();
-                TableRow row2 = new TableRow();
                 row.CssClass = "content_row";
-                row2.CssClass = "content_row";
                 TableCell cell1 = new TableCell();
                 TableCell cell2 = new TableCell();
-                cell1.CssClass = "title_cell";
-                cell1.Style["width"] = "100%";
+                cell1.CssClass = "content_cell";
                 cell2.CssClass = "content_cell";
-                cell2.Style["width"] = "100%";
+                row.Cells.Add(cell1);
+                row.Cells.Add(cell2);
 
-                cell1.Text = record.pictureName;
+                cell1.Text = $"Date: {record.pictureDate}";
+                cell2.Text = $"Number: {record.pictureNumber}";
+
+                TableRow row2 = new TableRow();
+                row2.CssClass = "content_row";
+                TableCell cell3 = new TableCell();
+                cell3.CssClass = "content_cell";
+                cell3.ColumnSpan= 2;
+
 
                 HtmlImage image = new HtmlImage();
                 //image.ID = "Image_Player_" + i.ToString();
                 image.Style["height"] = "30em";
                 image.Src = record.pictureURL;
 
-                cell2.Controls.Add(image);
+                cell3.Controls.Add(image);
 
-                row.Cells.Add(cell1);
-                row2.Cells.Add(cell2);
+                row2.Cells.Add(cell3);
+
+                Image_Table_of_Contents.Controls.Add(title);
+
                 Image_Table_of_Contents.Controls.Add(row);
                 Image_Table_of_Contents.Controls.Add(row2);
 

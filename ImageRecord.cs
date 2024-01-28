@@ -11,13 +11,17 @@ namespace Buldoc_Reader_Take_4
         public string pictureName;
         public int pictureNumber;
         public string pictureURL;
+        public string pictureDate;
+        public string pictureDescription;
 
-        public ImageRecord(int recordID, string recordName, int recordNumber, string recordURL) 
+        public ImageRecord(int recordID, string recordName, int recordNumber, string recordURL, string recordDate, string recordDescription) 
         {
             ID = recordID;
             pictureName = recordName;
             pictureNumber = recordNumber;
-            pictureURL = recordURL;           
+            pictureURL = recordURL;         
+            pictureDate = recordDate;
+            pictureDescription = recordDescription;
         
         }
 
