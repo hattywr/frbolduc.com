@@ -3,6 +3,7 @@ using System.IO;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Web;
 
 
 
@@ -35,6 +36,7 @@ namespace Buldoc_Reader_Take_4
         public List<AudioRecord> generateAudio()
         {
             List<AudioRecord> records = new List<AudioRecord>();
+            bool admin = false;
             try
             {
                 connection.Open();
@@ -52,9 +54,34 @@ namespace Buldoc_Reader_Take_4
                             string date = reader.GetString("recordingDate");
                             string length = reader.GetString("recordingLength");
                             string description = reader.GetString("recordingDescription");
+                            bool isRestricted = reader.GetBoolean("isRestricted");
+                            if(HttpContext.Current.Session["authenticated"] != null)
+                            {
+                                // get the authenticated property
+                                admin = (bool)HttpContext.Current.Session["authenticated"];
+                            }
+                            else
+                            {
+                                // user not authenticated
+                                admin = false;
+                            }
+                            
+                            if (isRestricted != true)
+                            {
+                                AudioRecord audioRecord = new AudioRecord(ID, name, url, date, length, description);
+                                records.Add(audioRecord);
+                            }
+                            else
+                            {
+                                if(admin == true)
+                                {
+                                    AudioRecord audioRecord = new AudioRecord(ID, name, url, date, length, description);
+                                    records.Add(audioRecord);
+                                }
+                            }
+                            // else we skip
 
-                            AudioRecord audioRecord = new AudioRecord(ID, name, url, date, length, description);
-                            records.Add(audioRecord);
+                            
 
                         }
                     }
@@ -75,6 +102,7 @@ namespace Buldoc_Reader_Take_4
 
         public List<VideoRecord> generateVideo()
         {
+            bool admin = false;
             List<VideoRecord> records = new List<VideoRecord>();
             try
             {
@@ -94,9 +122,32 @@ namespace Buldoc_Reader_Take_4
                             string length = reader.GetString("videoLength");
                             string date = reader.GetString("videoDate");
                             string location = reader.GetString("videoLocation");
-
-                            VideoRecord videoRecord = new VideoRecord(ID, name, url, description, length, date, location);
-                            records.Add(videoRecord);
+                            bool isRestricted = reader.GetBoolean("isRestricted");
+                            if (HttpContext.Current.Session["authenticated"] != null)
+                            {
+                                // get the authenticated property
+                                admin = (bool)HttpContext.Current.Session["authenticated"];
+                            }
+                            else
+                            {
+                                // user not authenticated
+                                admin = false;
+                            }
+                            if (isRestricted != true)
+                            {
+                                VideoRecord videoRecord = new VideoRecord(ID, name, url, description, length, date, location);
+                                records.Add(videoRecord);
+                            }
+                            else
+                            {
+                                if (admin == true)
+                                {
+                                    VideoRecord videoRecord = new VideoRecord(ID, name, url, description, length, date, location);
+                                    records.Add(videoRecord);
+                                }
+                            }
+                            // else we skip
+                           
 
                         }
                     }
@@ -117,6 +168,7 @@ namespace Buldoc_Reader_Take_4
 
         public List<ImageRecord> generateImages()
         {
+            bool admin = false;
             List<ImageRecord> records = new List<ImageRecord>();
             try
             {
@@ -135,9 +187,33 @@ namespace Buldoc_Reader_Take_4
                             string url = reader.GetString("pictureURL");
                             string date = reader.GetString("pictureDate");
                             string description = reader.GetString("pictureDescription");
+                            bool isRestricted = reader.GetBoolean("isRestricted");
+                            if (HttpContext.Current.Session["authenticated"] != null)
+                            {
+                                // get the authenticated property
+                                admin = (bool)HttpContext.Current.Session["authenticated"];
+                            }
+                            else
+                            {
+                                // user not authenticated
+                                admin = false;
+                            }
+                            if (isRestricted != true)
+                            {
+                                ImageRecord imageRecord = new ImageRecord(ID, name, pictureNumber, url, date, description);
+                                records.Add(imageRecord);
+                            }
+                            else
+                            {
+                                if (admin == true)
+                                {
+                                    ImageRecord imageRecord = new ImageRecord(ID, name, pictureNumber, url, date, description);
+                                    records.Add(imageRecord);
+                                }
+                            }
+                            // else we skip
 
-                            ImageRecord imageRecord = new ImageRecord(ID, name, pictureNumber, url, date, description);
-                            records.Add(imageRecord);
+                            
 
                         }
                     }
@@ -158,6 +234,7 @@ namespace Buldoc_Reader_Take_4
 
         public List<SourceRecord> generateSources()
         {
+            bool admin = false;
             List<SourceRecord> records = new List<SourceRecord>();
             try
             {
@@ -177,9 +254,32 @@ namespace Buldoc_Reader_Take_4
                             string description = reader.GetString("sourceDescription");
                             string date = reader.GetString("sourceDate");
                             string type = reader.GetString("sourceType");
+                            bool isRestricted = reader.GetBoolean("isRestricted");
+                            if (HttpContext.Current.Session["authenticated"] != null)
+                            {
+                                // get the authenticated property
+                                admin = (bool)HttpContext.Current.Session["authenticated"];
+                            }
+                            else
+                            {
+                                // user not authenticated
+                                admin = false;
+                            }
+                            if (isRestricted != true)
+                            {
+                                SourceRecord source = new SourceRecord(ID, extension, sourceNumber, url, description, date, type);
+                                records.Add(source);
+                            }
+                            else
+                            {
+                                if (admin == true)
+                                {
+                                    SourceRecord source = new SourceRecord(ID, extension, sourceNumber, url, description, date, type);
+                                    records.Add(source);
+                                }
+                            }
 
-                            SourceRecord source = new SourceRecord(ID, extension, sourceNumber, url, description, date, type);
-                            records.Add(source);
+                            
 
                         }
                     }
