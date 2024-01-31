@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace Buldoc_Reader_Take_4
 {
@@ -55,7 +56,8 @@ namespace Buldoc_Reader_Take_4
 
                 HtmlImage image = new HtmlImage();
                 //image.ID = "Image_Player_" + i.ToString();
-                image.Style["height"] = "30em";
+                //image.Style["height"] = "30em";
+                image.Attributes["style"] = "max-width:100%; height:auto; width:auto";
                 image.Src = record.pictureURL;
 
                 cell3.Controls.Add(image);

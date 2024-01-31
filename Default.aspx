@@ -42,6 +42,13 @@
                <asp:Button runat="server" ID="sources_redirect_button" Text="GO" CssClass="button_style" OnClick="sources_redirect_button_Click" />
            </asp:TableCell>
        </asp:TableRow>
+
+       <asp:TableRow runat="server" CssClass="content_row">
+           <asp:TableCell runat="server" Text ="Search For Resource" CssClass="content_cell" ></asp:TableCell>
+           <asp:TableCell runat="server" ID="resourceSearchCell" CssClass="content_cell">
+               <asp:Button runat="server" ID="resourceSearchButton" Text="GO" CssClass="button_style" OnClick="resourceSearchButton_Click" />
+           </asp:TableCell>
+       </asp:TableRow>
    </asp:Table>
 
 </asp:Content>

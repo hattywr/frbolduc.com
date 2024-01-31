@@ -78,6 +78,7 @@ namespace Buldoc_Reader_Take_4
                     video.Attributes.Add("controls", "controls");
                     video.Src = record.videoURL;
                     video.Attributes.Add("preload", "preload");
+                    video.Attributes["style"] = "max-width:100%; height:auto; width:auto";
 
                     cell3.Controls.Add(video);
 

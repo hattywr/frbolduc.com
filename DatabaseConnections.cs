@@ -219,6 +219,7 @@ namespace Buldoc_Reader_Take_4
                     }
                 }
 
+
             }
             catch (Exception ex)
             {
@@ -413,6 +414,211 @@ namespace Buldoc_Reader_Take_4
             }
 
             return correct;
+
+        }
+
+        public SearchResults searchRecords(string searchQuery)
+        {
+            List<AudioRecord> audio = new List<AudioRecord>();
+            List<VideoRecord> video = new List<VideoRecord>();
+            List<ImageRecord> image = new List<ImageRecord>();
+            List<SourceRecord> source = new List<SourceRecord>();
+            bool admin = false;
+            try
+            {
+                connection.Open();
+                string query = $"SELECT * FROM audioRecords where recordingName like '%{searchQuery}%' or recordingDescription like '%{searchQuery}%'";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int ID = reader.GetInt32("ID");
+                            string name = reader.GetString("recordingName");
+                            string url = reader.GetString("recordingURL");
+                            string date = reader.GetString("recordingDate");
+                            string length = reader.GetString("recordingLength");
+                            string description = reader.GetString("recordingDescription");
+                            bool isRestricted = reader.GetBoolean("isRestricted");
+                            if (HttpContext.Current.Session["authenticated"] != null)
+                            {
+                                // get the authenticated property
+                                admin = (bool)HttpContext.Current.Session["authenticated"];
+                            }
+                            else
+                            {
+                                // user not authenticated
+                                admin = false;
+                            }
+
+                            if (isRestricted != true)
+                            {
+                                AudioRecord audioRecord = new AudioRecord(ID, name, url, date, length, description);
+                                audio.Add(audioRecord);
+                            }
+                            else
+                            {
+                                if (admin == true)
+                                {
+                                    AudioRecord audioRecord = new AudioRecord(ID, name, url, date, length, description);
+                                    audio.Add(audioRecord);
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                query = $"SELECT * from videoRecords where videoName like '%{searchQuery}%' or videoDescription like '%{searchQuery}%'";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int ID = reader.GetInt32("ID");
+                            string name = reader.GetString("videoName");
+                            string url = reader.GetString("videoURL");
+                            string description = reader.GetString("videoDescription");
+                            string length = reader.GetString("videoLength");
+                            string date = reader.GetString("videoDate");
+                            string location = reader.GetString("videoLocation");
+                            bool isRestricted = reader.GetBoolean("isRestricted");
+                            if (HttpContext.Current.Session["authenticated"] != null)
+                            {
+                                // get the authenticated property
+                                admin = (bool)HttpContext.Current.Session["authenticated"];
+                            }
+                            else
+                            {
+                                // user not authenticated
+                                admin = false;
+                            }
+                            if (isRestricted != true)
+                            {
+                                VideoRecord videoRecord = new VideoRecord(ID, name, url, description, length, date, location);
+                                video.Add(videoRecord);
+                            }
+                            else
+                            {
+                                if (admin == true)
+                                {
+                                    VideoRecord videoRecord = new VideoRecord(ID, name, url, description, length, date, location);
+                                    video.Add(videoRecord);
+                                }
+                            }
+                            // else we skip
+
+
+                        }
+                    }
+                }
+                query = $"SELECT * FROM pictureRecords where pictureName like '%{searchQuery}%' or pictureDescription like '%{searchQuery}%' ";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int ID = reader.GetInt32("ID");
+                            string name = reader.GetString("pictureName");
+                            int pictureNumber = reader.GetInt32("pictureNumber");
+                            string url = reader.GetString("pictureURL");
+                            string date = reader.GetString("pictureDate");
+                            string description = reader.GetString("pictureDescription");
+                            bool isRestricted = reader.GetBoolean("isRestricted");
+                            if (HttpContext.Current.Session["authenticated"] != null)
+                            {
+                                // get the authenticated property
+                                admin = (bool)HttpContext.Current.Session["authenticated"];
+                            }
+                            else
+                            {
+                                // user not authenticated
+                                admin = false;
+                            }
+                            if (isRestricted != true)
+                            {
+                                ImageRecord imageRecord = new ImageRecord(ID, name, pictureNumber, url, date, description);
+                                image.Add(imageRecord);
+                            }
+                            else
+                            {
+                                if (admin == true)
+                                {
+                                    ImageRecord imageRecord = new ImageRecord(ID, name, pictureNumber, url, date, description);
+                                    image.Add(imageRecord);
+                                }
+                            }
+                            // else we skip
+
+
+
+                        }
+                    }
+                }
+
+                query = $"select * from sourceRecords where sourceDescription like '%{searchQuery}%' or sourceNumber like '%{searchQuery}%' ";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int ID = reader.GetInt32("ID");
+                            string extension = reader.GetString("fileExtension");
+                            int sourceNumber = reader.GetInt32("sourceNumber");
+                            string url = reader.GetString("sourceURL");
+                            string description = reader.GetString("sourceDescription");
+                            string date = reader.GetString("sourceDate");
+                            string type = reader.GetString("sourceType");
+                            bool isRestricted = reader.GetBoolean("isRestricted");
+                            if (HttpContext.Current.Session["authenticated"] != null)
+                            {
+                                // get the authenticated property
+                                admin = (bool)HttpContext.Current.Session["authenticated"];
+                            }
+                            else
+                            {
+                                // user not authenticated
+                                admin = false;
+                            }
+                            if (isRestricted != true)
+                            {
+                                SourceRecord source1 = new SourceRecord(ID, extension, sourceNumber, url, description, date, type);
+                                source.Add(source1);
+                            }
+                            else
+                            {
+                                if (admin == true)
+                                {
+                                    SourceRecord source1 = new SourceRecord(ID, extension, sourceNumber, url, description, date, type);
+                                    source.Add(source1);
+                                }
+                            }
+
+                            
+
+                        }
+                    }
+                } 
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            SearchResults results = new SearchResults(audio,video,image,source);
+            return results;
 
         }
     }

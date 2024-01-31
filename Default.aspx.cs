@@ -43,5 +43,10 @@ namespace Buldoc_Reader_Take_4
         {
             Response.Redirect("Sources_Table_Of_Contents.aspx");
         }
+
+        protected void resourceSearchButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ResourceSearch.aspx");
+        }
     }
 }

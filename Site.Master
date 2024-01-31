@@ -79,6 +79,10 @@
                         <li>
                             <a href="Sources_Table_Of_Contents.aspx">Source Navigation</a>
                         </li>
+
+                        <li>
+                            <a href="ResourceSearch.aspx">Resource Search</a>
+                        </li>
                     </ul>
 
 
