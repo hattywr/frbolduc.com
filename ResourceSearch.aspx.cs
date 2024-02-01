@@ -22,9 +22,15 @@ namespace Buldoc_Reader_Take_4
             {
                 string searchText = searchTB.Text.Replace(";", "");
                 SearchResults results = connections.searchRecords(searchText);
-                generateTable(results);
-
-
+                if(results.audioRecords.Count == 0 && results.imageRecords.Count == 0 && results.sourceRecords.Count == 0 && results.videoRecords.Count == 0)
+                {
+                    string script = "setTimeout(function() { alert('Search Yielded No Results - Adjust Search and Try Again!'); }, 25);";
+                    ClientScript.RegisterStartupScript(this.GetType(), "MyScript", script, true);
+                }
+                else
+                {
+                    generateTable(results);
+                }
             }
             else
             {

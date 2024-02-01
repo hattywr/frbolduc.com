@@ -19,9 +19,9 @@ namespace Buldoc_Reader_Take_4
                 {
                     Response.Redirect("Default.aspx");
                 }
-                records = connections.generateRestrictedContent();
+                //records = connections.generateRestrictedContent();
 
-                create_table();
+                //create_table();
             }
             else
             {

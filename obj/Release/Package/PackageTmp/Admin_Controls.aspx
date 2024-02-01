@@ -7,7 +7,7 @@
     <asp:Table ID="Audio_Content" runat="server" CssClass="contents_table">
 
        <asp:TableRow runat="server" CssClass="table_title">
-           <asp:TableCell runat="server" Text="Restricted Content" ColumnSpan="2" CssClass="title_cell">
+           <asp:TableCell runat="server" Text="You are now authenticated - return to the normal web page for the type of content you are seeking, and you will be able to view restricted items" ColumnSpan="2" CssClass="title_cell">
         </asp:TableCell>
 
        </asp:TableRow>
